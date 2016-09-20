@@ -1,0 +1,31 @@
+Alexander Strasser <>
+Anssi Hannula <>
+Ash Hughes <>
+Attila Kinali <>
+Baptiste Coudurier <>
+Ben Littler <>
+Benoit Fouet <>
+Clément Bœsch <>
+Daniel Verkamp <>
+Ganesh Ajjanagadde <>
+Gwenole Beauchesne <>
+Jaikrishnan Menon <>
+Jean Delvare <>
+Loren Merritt <>
+Lou Logan <>
+Michael Niedermayer <>
+Nicolas George <>
+Panagiotis Issaris <>
+Peter Ross <>
+Philip Langdale <>
+Reimar Doeffinger <>
+Reinhard Tartler <>
+Reynaldo H. Verdejo Pinochet <>
+Robert Swain <>
+Sascha Sommer <>
+Stefano Sabatini <>
+Stephan Hilb <>
+Tiancheng "Timothy" Gu <>
+Tim Nicholson <>
+Tomas Härdin <>
+Wei Gao <>
