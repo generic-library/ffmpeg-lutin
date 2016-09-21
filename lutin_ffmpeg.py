@@ -5,7 +5,7 @@ import lutin.debug as debug
 import os
 
 def get_type():
-	return "BINARY_SHARED"
+	#return "BINARY_SHARED"
 	return "BINARY"
 
 def get_desc():
@@ -49,8 +49,6 @@ def create(target, module_name):
 	    'va',
 	    'vdpau',
 	    ])
-	    
-	my_module.add_flag("link-lib", ["Xv", "X11", "Xext", "vdpau", "va", "va-drm", "va", "va-x11", "va",
-	                                "xcb", "xcb-shm", "xcb-xfixes", "xcb-shape", "X11", "jack", "asound", "SDL", "pthread", "m", "lzma", "bz2", "z", "pthread"])
-	my_module.add_flag("link", "-Wl,--as-needed -Wl,-z,noexecstack -Wl,--warn-common")
 	return my_module
+
+

@@ -34,8 +34,7 @@ def create(target, module_name):
 	
 	# add the file to compile:
 	my_module.add_src_file([
-	    'ffmpeg/ffserver.c',
-	    'ffmpeg/ffserver_config.c',
+	    'ffmpeg/ffplay.c',
 	    'ffmpeg/cmdutils.c',
 	    ])
 	
@@ -44,18 +43,7 @@ def create(target, module_name):
 	my_module.add_depend([
 	    'ffmpeg-libs',
 	    'va',
-	    'vdpau',
-	    ])
-	my_module.add_flag('c', [
-	    "-D_ISOC99_SOURCE",
-	    "-D_FILE_OFFSET_BITS=64",
-	    "-D_LARGEFILE_SOURCE",
-	    "-D_POSIX_C_SOURCE=200112",
-	    "-D_XOPEN_SOURCE=600",
-	    "-DZLIB_CONST",
-	    "-fomit-frame-pointer",
-	    "-D_GNU_SOURCE=1",
-	    "-D_REENTRANT"
+	    'SDL',
 	    ])
 	return my_module
 

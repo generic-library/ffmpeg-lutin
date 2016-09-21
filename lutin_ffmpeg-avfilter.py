@@ -305,5 +305,8 @@ def create(target, module_name):
 	my_module.add_depend('m')
 	my_module.add_depend('z')
 	my_module.add_depend('pthread')
+	my_module.add_depend([
+	    'ffmpeg-avcodec',
+	    ])
 
 	return my_module
