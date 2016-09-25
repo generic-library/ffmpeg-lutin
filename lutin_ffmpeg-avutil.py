@@ -105,8 +105,8 @@ def create(target, module_name):
 	    'ffmpeg/libavutil/xtea.c',
 	    ])
 	my_module.compile_version("c", 1999, gnu=True)
-	my_module.add_path(os.path.join(tools.get_current_path(__file__), "ffmpeg"))
-	my_module.add_path(os.path.join(tools.get_current_path(__file__), "generated"))
+	my_module.add_path(os.path.join(tools.get_current_path(__file__), "ffmpeg"), export=True)
+	my_module.add_path(os.path.join(tools.get_current_path(__file__), "generated"), export=True)
 	my_module.add_flag('c', [
 	    "-D_ISOC99_SOURCE",
 	    "-D_FILE_OFFSET_BITS=64",
@@ -147,8 +147,11 @@ def create(target, module_name):
 	    "-Werror=vla",
 	    "-Wformat",
 	    "-fdiagnostics-color=auto",
-	    "-Wno-maybe-uninitialized",
 	    ])
+	if target.get_compilator() == "clang":
+		my_module.add_flag('c', [ "-Wno-uninitialized"])
+	else:
+		my_module.add_flag('c', [ "-Wno-maybe-uninitialized"])
 	if "Linux" in target.get_type():
 		# TODO: Check the real impact ...
 		my_module.add_flag('link-dynamic', ["-Wl,-Bsymbolic"])

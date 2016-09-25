@@ -295,8 +295,11 @@ def create(target, module_name):
 	    "-Werror=vla",
 	    "-Wformat",
 	    "-fdiagnostics-color=auto",
-	    "-Wno-maybe-uninitialized",
 	    ])
+	if target.get_compilator() == "clang":
+		my_module.add_flag('c', [ "-Wno-uninitialized"])
+	else:
+		my_module.add_flag('c', [ "-Wno-maybe-uninitialized"])
 	if "Linux" in target.get_type():
 		# TODO: Check the real impact ...
 		my_module.add_flag('link-dynamic', ["-Wl,-Bsymbolic"])
