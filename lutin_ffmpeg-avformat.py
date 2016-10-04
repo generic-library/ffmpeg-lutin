@@ -1,5 +1,4 @@
 #!/usr/bin/python
-import lutin.module as module
 import lutin.tools as tools
 import lutin.debug as debug
 import os
@@ -25,11 +24,7 @@ def get_maintainer():
 def get_version():
 	return "version.txt"
 
-# create the module
-# @param[in] target reference on the Target that is currently build
-# @param[in] module_name Name of the module that is extract from the file name (to be generic)
-def create(target, module_name):
-	my_module = module.Module(__file__, module_name, get_type())
+def configure(target, my_module):
 	
 	# add the file to compile:
 	my_module.add_src_file([
@@ -459,8 +454,8 @@ def create(target, module_name):
 	    'ffmpeg/libavformat/yuv4mpegenc.c',
 	    ])
 	my_module.compile_version("c", 1999, gnu=True)
-	my_module.add_path(os.path.join(tools.get_current_path(__file__), "ffmpeg"))
-	my_module.add_path(os.path.join(tools.get_current_path(__file__), "generated"))
+	my_module.add_path("ffmpeg")
+	my_module.add_path("generated")
 	my_module.add_flag('c', [
 	    "-D_ISOC99_SOURCE",
 	    "-D_FILE_OFFSET_BITS=64",
@@ -518,4 +513,4 @@ def create(target, module_name):
 	my_module.add_depend('arpa')
 	my_module.add_depend('ffmpeg-avcodec')
 
-	return my_module
+	return True
