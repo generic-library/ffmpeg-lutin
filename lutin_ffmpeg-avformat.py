@@ -511,6 +511,9 @@ def configure(target, my_module):
 	my_module.add_depend('pthread')
 	my_module.add_depend('rpc')
 	my_module.add_depend('arpa')
-	my_module.add_depend('ffmpeg-avcodec')
+	my_module.add_depend([
+	    'ffmpeg-avcodec',
+	    'ffmpeg-avutil',
+	    ])
 
 	return True
