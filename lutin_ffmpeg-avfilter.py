@@ -304,6 +304,7 @@ def configure(target, my_module):
 	my_module.add_depend('pthread')
 	my_module.add_depend([
 	    'ffmpeg-avcodec',
+	    'ffmpeg-avutil',
 	    ])
 
 	return True

@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import lutin.module as module
 import lutin.tools as tools
 import lutin.debug as debug
 import os
@@ -29,12 +30,9 @@ def configure(target, my_module):
 	
 	# add the file to compile:
 	my_module.add_src_file([
-	    'ffmpeg/ffmpeg.c',
+	    'ffmpeg/ffserver.c',
+	    'ffmpeg/ffserver_config.c',
 	    'ffmpeg/cmdutils.c',
-	    'ffmpeg/ffmpeg_opt.c',
-	    'ffmpeg/ffmpeg_filter.c',
-	    'ffmpeg/ffmpeg_vaapi.c',
-	    #'ffmpeg/ffmpeg_vdpau.c',
 	    ])
 	
 	my_module.add_path("ffmpeg")
@@ -43,6 +41,17 @@ def configure(target, my_module):
 	    'ffmpeg-libs',
 	    'va',
 	    'vdpau',
+	    ])
+	my_module.add_flag('c', [
+	    "-D_ISOC99_SOURCE",
+	    "-D_FILE_OFFSET_BITS=64",
+	    "-D_LARGEFILE_SOURCE",
+	    "-D_POSIX_C_SOURCE=200112",
+	    "-D_XOPEN_SOURCE=600",
+	    "-DZLIB_CONST",
+	    "-fomit-frame-pointer",
+	    "-D_GNU_SOURCE=1",
+	    "-D_REENTRANT"
 	    ])
 	return True
 

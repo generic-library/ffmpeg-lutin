@@ -40,6 +40,6 @@ def configure(target, my_module):
 	    'va',
 	    'SDL',
 	    ])
-	return False
+	return True
 
 

@@ -881,6 +881,9 @@ def configure(target, my_module):
 	my_module.add_depend('m')
 	my_module.add_depend('z')
 	my_module.add_depend('pthread')
-	my_module.add_depend('ffmpeg-avswresample')
+	my_module.add_depend([
+	    'ffmpeg-avswresample',
+	    'ffmpeg-avutil',
+	    ])
 
 	return True
