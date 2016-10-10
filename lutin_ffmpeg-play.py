@@ -2,6 +2,7 @@
 import lutin.tools as tools
 import lutin.debug as debug
 import os
+import lutinLib_ffmpegCommon
 
 def get_type():
 	#return "BINARY_SHARED"
@@ -26,15 +27,15 @@ def get_version():
 	return "version.txt"
 
 def configure(target, my_module):
-	
+	if "Linux" not in target.get_type():
+		return False
 	# add the file to compile:
 	my_module.add_src_file([
 	    'ffmpeg/ffplay.c',
 	    'ffmpeg/cmdutils.c',
 	    ])
-	
 	my_module.add_path("ffmpeg")
-	my_module.add_path("generated")
+	lutinLib_ffmpegCommon.add_generate_path(target, my_module)
 	my_module.add_depend([
 	    'ffmpeg-libs',
 	    'va',

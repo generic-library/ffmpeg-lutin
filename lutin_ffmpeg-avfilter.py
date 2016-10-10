@@ -2,6 +2,7 @@
 import lutin.debug as debug
 import lutin.tools as tools
 import os
+import lutinLib_ffmpegCommon
 
 def get_type():
 	return "LIBRARY"
@@ -246,57 +247,11 @@ def configure(target, my_module):
 	    'ffmpeg/libavfilter/x86/vf_w3fdif_init.c',
 	    'ffmpeg/libavfilter/x86/vf_yadif_init.c',
 	    ])
-	my_module.compile_version("c", 1999, gnu=True)
+	my_module.compile_version("c", 1999)
 	my_module.add_path("ffmpeg")
-	my_module.add_path("generated")
-	my_module.add_flag('c', [
-	    "-D_ISOC99_SOURCE",
-	    "-D_FILE_OFFSET_BITS=64",
-	    "-D_LARGEFILE_SOURCE",
-	    "-D_POSIX_C_SOURCE=200112",
-	    "-D_XOPEN_SOURCE=600",
-	    "-DZLIB_CONST",
-	    "-DHAVE_AV_CONFIG_H",
-	    "-D_GNU_SOURCE=1",
-	    "-D_REENTRANT",
-	    "-DPIC",
-	    ])
-	#-I/usr/include/SDL
-	my_module.add_flag('c', [
-	    "-Wdeclaration-after-statement",
-	    "-Wall",
-	    "-Wdisabled-optimization",
-	    "-Wpointer-arith",
-	    "-Wredundant-decls",
-	    "-Wwrite-strings",
-	    "-Wtype-limits",
-	    "-Wundef",
-	    "-Wmissing-prototypes",
-	    "-Wno-pointer-to-int-cast",
-	    "-Wstrict-prototypes",
-	    "-Wempty-body",
-	    "-Wno-parentheses",
-	    "-Wno-switch",
-	    "-Wno-format-zero-length",
-	    "-Wno-pointer-sign",
-	    "-Wno-unused-const-variable",
-	    "-fno-math-errno",
-	    "-fno-signed-zeros",
-	    "-Werror=format-security",
-	    "-Werror=implicit-function-declaration",
-	    "-Werror=missing-prototypes",
-	    "-Werror=return-type",
-	    "-Werror=vla",
-	    "-Wformat",
-	    "-fdiagnostics-color=auto",
-	    ])
-	if target.get_compilator() == "clang":
-		my_module.add_flag('c', [ "-Wno-uninitialized"])
-	else:
-		my_module.add_flag('c', [ "-Wno-maybe-uninitialized"])
-	if "Linux" in target.get_type():
-		# TODO: Check the real impact ...
-		my_module.add_flag('link-dynamic', ["-Wl,-Bsymbolic"])
+	
+	lutinLib_ffmpegCommon.add_common_property(target, my_module);
+	
 	# add dependency of libraries:
 	my_module.add_depend('c')
 	my_module.add_depend('m')
