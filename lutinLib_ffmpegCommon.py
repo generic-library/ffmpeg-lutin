@@ -41,6 +41,28 @@ def add_common_property(target, my_module):
 		    "-D__USE_MINGW_ANSI_STDIO=1",
 		    "-D__printf__=__gnu_printf__",
 		    ])
+	elif "Android" in target.get_type():
+		my_module.add_flag('c', [
+		    "-DANDROID",
+		    "-Dstrtod=avpriv_strtod",
+		    "-ftree-ter",
+		    ])
+		if target.get_arm_mode() == "thumb":
+			my_module.add_flag('c', [
+			    "-DCONFIG_THUMB=1",
+			    ])
+		else:
+			my_module.add_flag('c', [
+			    "-DCONFIG_THUMB=1",
+			    ])
+	
+	if target.get_arch() == "arm":
+		# need to force optimisation (compilation error otherwise)
+		my_module.add_flag('c', [
+		    "-O3"
+		    ])
+	
+	
 	
 	#-I/usr/include/SDL
 	my_module.add_flag('c', [
@@ -48,7 +70,7 @@ def add_common_property(target, my_module):
 	    "-Wall",
 	    "-Wdisabled-optimization",
 	    "-Wpointer-arith",
-	    "-Wredundant-decls",
+	    #"-Wredundant-decls",
 	    "-Wwrite-strings",
 	    "-Wtype-limits",
 	    "-Wundef",
@@ -59,8 +81,8 @@ def add_common_property(target, my_module):
 	    "-Wno-parentheses",
 	    "-Wno-switch",
 	    "-Wno-format-zero-length",
-	    "-Wno-pointer-sign",
-	    "-Wno-unused-const-variable",
+	    #"-Wno-pointer-sign",
+	    #"-Wno-unused-const-variable",
 	    "-fno-math-errno",
 	    "-fno-signed-zeros",
 	    "-Werror=format-security",
@@ -73,6 +95,7 @@ def add_common_property(target, my_module):
 	    ])
 	if "Windows" in target.get_type():
 		my_module.add_flag('c', [
+		    "Wdeclaration-after-statement",
 		    "-fomit-frame-pointer",
 		    "-Wno-maybe-uninitialized",
 		    ])

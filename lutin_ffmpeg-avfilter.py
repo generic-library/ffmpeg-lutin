@@ -232,21 +232,29 @@ def configure(target, my_module):
 	    'ffmpeg/libavfilter/vsrc_mandelbrot.c',
 	    'ffmpeg/libavfilter/vsrc_testsrc.c',
 	    'ffmpeg/libavfilter/window_func.c',
-	    'ffmpeg/libavfilter/x86/af_volume_init.c',
-	    'ffmpeg/libavfilter/x86/avf_showcqt_init.c',
-	    'ffmpeg/libavfilter/x86/colorspacedsp_init.c',
-	    'ffmpeg/libavfilter/x86/vf_blend_init.c',
-	    'ffmpeg/libavfilter/x86/vf_bwdif_init.c',
-	    'ffmpeg/libavfilter/x86/vf_gradfun_init.c',
-	    'ffmpeg/libavfilter/x86/vf_idet_init.c',
-	    'ffmpeg/libavfilter/x86/vf_maskedmerge_init.c',
-	    'ffmpeg/libavfilter/x86/vf_noise.c',
-	    'ffmpeg/libavfilter/x86/vf_psnr_init.c',
-	    'ffmpeg/libavfilter/x86/vf_removegrain_init.c',
-	    'ffmpeg/libavfilter/x86/vf_ssim_init.c',
-	    'ffmpeg/libavfilter/x86/vf_w3fdif_init.c',
-	    'ffmpeg/libavfilter/x86/vf_yadif_init.c',
 	    ])
+	if target.get_arch() == "x86":
+		my_module.add_src_file([
+		    'ffmpeg/libavfilter/x86/af_volume_init.c',
+		    'ffmpeg/libavfilter/x86/avf_showcqt_init.c',
+		    'ffmpeg/libavfilter/x86/colorspacedsp_init.c',
+		    'ffmpeg/libavfilter/x86/vf_blend_init.c',
+		    'ffmpeg/libavfilter/x86/vf_bwdif_init.c',
+		    'ffmpeg/libavfilter/x86/vf_gradfun_init.c',
+		    'ffmpeg/libavfilter/x86/vf_idet_init.c',
+		    'ffmpeg/libavfilter/x86/vf_maskedmerge_init.c',
+		    'ffmpeg/libavfilter/x86/vf_noise.c',
+		    'ffmpeg/libavfilter/x86/vf_psnr_init.c',
+		    'ffmpeg/libavfilter/x86/vf_removegrain_init.c',
+		    'ffmpeg/libavfilter/x86/vf_ssim_init.c',
+		    'ffmpeg/libavfilter/x86/vf_w3fdif_init.c',
+		    'ffmpeg/libavfilter/x86/vf_yadif_init.c',
+		    ])
+	elif target.get_arch() == "arm":
+		# no specific files
+		pass
+	else:
+		debug.warning("unknow architecture ...");
 	my_module.compile_version("c", 1999)
 	my_module.add_path("ffmpeg")
 	

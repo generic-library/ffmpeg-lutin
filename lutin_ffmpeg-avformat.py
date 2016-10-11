@@ -469,7 +469,8 @@ def configure(target, my_module):
 	my_module.add_depend('m')
 	my_module.add_depend('z')
 	my_module.add_depend('pthread')
-	if "Windows" not in target.get_type():
+	if     "Windows" not in target.get_type() \
+	   and "Android" not in target.get_type():
 		my_module.add_depend('rpc')
 		my_module.add_depend('arpa')
 	my_module.add_depend([

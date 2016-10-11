@@ -37,10 +37,22 @@ def configure(target, my_module):
 	    'ffmpeg/libswresample/resample_dsp.c',
 	    'ffmpeg/libswresample/swresample.c',
 	    'ffmpeg/libswresample/swresample_frame.c',
-	    'ffmpeg/libswresample/x86/audio_convert_init.c',
-	    'ffmpeg/libswresample/x86/rematrix_init.c',
-	    'ffmpeg/libswresample/x86/resample_init.c',
 	    ])
+	if target.get_arch() == "x86":
+		my_module.add_src_file([
+		    'ffmpeg/libswresample/x86/audio_convert_init.c',
+		    'ffmpeg/libswresample/x86/rematrix_init.c',
+		    'ffmpeg/libswresample/x86/resample_init.c',
+		    ])
+	elif target.get_arch() == "arm":
+		my_module.add_src_file([
+		    'ffmpeg/libswresample/arm/audio_convert_init.c',
+		    'ffmpeg/libswresample/arm/audio_convert_neon.S',
+		    'ffmpeg/libswresample/arm/resample.S',
+		    'ffmpeg/libswresample/arm/resample_init.c',
+		    ])
+	else:
+		debug.warning("unknow architecture ...");
 	my_module.compile_version("c", 1999)
 	my_module.add_path("ffmpeg")
 	

@@ -42,12 +42,27 @@ def configure(target, my_module):
 	    'ffmpeg/libswscale/swscale_unscaled.c',
 	    'ffmpeg/libswscale/utils.c',
 	    'ffmpeg/libswscale/vscale.c',
-	    'ffmpeg/libswscale/x86/hscale_fast_bilinear_simd.c',
-	    'ffmpeg/libswscale/x86/rgb2rgb.c',
-	    'ffmpeg/libswscale/x86/swscale.c',
-	    'ffmpeg/libswscale/x86/yuv2rgb.c',
 	    'ffmpeg/libswscale/yuv2rgb.c',
 	    ])
+	if target.get_arch() == "x86":
+		my_module.add_src_file([
+		    'ffmpeg/libswscale/x86/hscale_fast_bilinear_simd.c',
+		    'ffmpeg/libswscale/x86/rgb2rgb.c',
+		    'ffmpeg/libswscale/x86/swscale.c',
+		    'ffmpeg/libswscale/x86/yuv2rgb.c',
+		    ])
+	elif target.get_arch() == "arm":
+		my_module.add_src_file([
+		    'ffmpeg/libswscale/arm/hscale.S',
+		    'ffmpeg/libswscale/arm/output.S',
+		    'ffmpeg/libswscale/arm/rgb2yuv_neon_16.S',
+		    'ffmpeg/libswscale/arm/rgb2yuv_neon_32.S',
+		    'ffmpeg/libswscale/arm/swscale.c',
+		    'ffmpeg/libswscale/arm/swscale_unscaled.c',
+		    'ffmpeg/libswscale/arm/yuv2rgb_neon.S',
+		    ])
+	else:
+		debug.warning("unknow architecture ...");
 	my_module.compile_version("c", 1999)
 	my_module.add_path("ffmpeg")
 	

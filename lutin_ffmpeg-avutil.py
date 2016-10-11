@@ -92,14 +92,28 @@ def configure(target, my_module):
 	    'ffmpeg/libavutil/tree.c',
 	    'ffmpeg/libavutil/twofish.c',
 	    'ffmpeg/libavutil/utils.c',
-	    'ffmpeg/libavutil/x86/cpu.c',
-	    'ffmpeg/libavutil/x86/fixed_dsp_init.c',
-	    'ffmpeg/libavutil/x86/float_dsp_init.c',
-	    'ffmpeg/libavutil/x86/lls_init.c',
-	    'ffmpeg/libavutil/x86/pixelutils_init.c',
 	    'ffmpeg/libavutil/xga_font_data.c',
 	    'ffmpeg/libavutil/xtea.c',
 	    ])
+	if target.get_arch() == "x86":
+		my_module.add_src_file([
+		    'ffmpeg/libavutil/x86/cpu.c',
+		    'ffmpeg/libavutil/x86/fixed_dsp_init.c',
+		    'ffmpeg/libavutil/x86/float_dsp_init.c',
+		    'ffmpeg/libavutil/x86/lls_init.c',
+		    'ffmpeg/libavutil/x86/pixelutils_init.c',
+		    ])
+	elif target.get_arch() == "arm":
+		my_module.add_src_file([
+		    'ffmpeg/libavutil/arm/float_dsp_init_arm.c',
+		    'ffmpeg/libavutil/arm/float_dsp_init_neon.c',
+		    'ffmpeg/libavutil/arm/float_dsp_init_vfp.c',
+		    'ffmpeg/libavutil/arm/float_dsp_neon.S',
+		    'ffmpeg/libavutil/arm/float_dsp_vfp.S',
+		    ])
+	else:
+		debug.warning("unknow architecture ...");
+
 	my_module.compile_version("c", 1999)
 	my_module.add_path("ffmpeg", export=True)
 	
