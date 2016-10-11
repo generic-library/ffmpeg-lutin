@@ -20,11 +20,13 @@ def add_generate_path(target, my_module):
 def add_common_property(target, my_module):
 	add_generate_path(target, my_module)
 	
+	
 	my_module.add_flag('c', [
 	    "-D_ISOC99_SOURCE",
 	    "-D_FILE_OFFSET_BITS=64",
 	    "-D_LARGEFILE_SOURCE",
 	    "-D_POSIX_C_SOURCE=200112",
+	    "-D_DARWIN_C_SOURCE",
 	    "-D_XOPEN_SOURCE=600",
 	    "-DHAVE_AV_CONFIG_H",
 	    ])
@@ -32,6 +34,24 @@ def add_common_property(target, my_module):
 		my_module.add_flag('c', [
 		    "-DZLIB_CONST",
 		    "-D_GNU_SOURCE=1",
+		    "-D_REENTRANT",
+		    "-DPIC"
+		    ])
+	elif    "MacOs" in target.get_type() \
+	     or "IOs" in target.get_type():
+		my_module.add_depend([
+		    "QuartzCore",
+		    "AppKit",
+		    "opengl",
+		    "CoreVideo",
+		    "AVFoundation",
+		    "CoreMedia",
+		    "VideoDecodeAcceleration",
+		    "CoreGraphics",
+		    "CoreServices",
+		    ])
+		my_module.add_flag('c', [
+		    "-DZLIB_CONST",
 		    "-D_REENTRANT",
 		    "-DPIC"
 		    ])
@@ -53,7 +73,7 @@ def add_common_property(target, my_module):
 			    ])
 		else:
 			my_module.add_flag('c', [
-			    "-DCONFIG_THUMB=1",
+			    "-DCONFIG_THUMB=0",
 			    ])
 	
 	if target.get_arch() == "arm":
@@ -85,22 +105,29 @@ def add_common_property(target, my_module):
 	    #"-Wno-unused-const-variable",
 	    "-fno-math-errno",
 	    "-fno-signed-zeros",
-	    "-Werror=format-security",
+	    ##"-Werror=format-security",
 	    "-Werror=implicit-function-declaration",
 	    "-Werror=missing-prototypes",
 	    "-Werror=return-type",
-	    "-Werror=vla",
-	    "-Wformat",
-	    "-fdiagnostics-color=auto",
+	    ##"-Werror=vla",
+	    ##"-Wformat",
+	    ##"-fdiagnostics-color=auto",
 	    ])
+	
 	if "Windows" in target.get_type():
 		my_module.add_flag('c', [
 		    "Wdeclaration-after-statement",
 		    "-fomit-frame-pointer",
 		    "-Wno-maybe-uninitialized",
 		    ])
+	elif    "MacOs" in target.get_type() \
+	     or "IOs" in target.get_type():
+		my_module.add_flag('c', [
+		    "-fomit-frame-pointer",
+		    "-Qunused-arguments",
+		    ])
+		my_module.add_path('ffmpeg/compat/dispatch_semaphore')
 	
-
 	if target.get_compilator() == "clang":
 		my_module.add_flag('c', [ "-Wno-uninitialized"])
 	else:
@@ -108,3 +135,4 @@ def add_common_property(target, my_module):
 	if "Linux" in target.get_type():
 		# TODO: Check the real impact ...
 		my_module.add_flag('link-dynamic', ["-Wl,-Bsymbolic"])
+	

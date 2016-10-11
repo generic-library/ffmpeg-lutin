@@ -255,6 +255,11 @@ def configure(target, my_module):
 		pass
 	else:
 		debug.warning("unknow architecture ...");
+	if "MacOs" in target.get_type():
+		my_module.add_src_file([
+		    'ffmpeg/libavfilter/vf_coreimage.m',
+		    ])
+	
 	my_module.compile_version("c", 1999)
 	my_module.add_path("ffmpeg")
 	
@@ -268,6 +273,8 @@ def configure(target, my_module):
 	my_module.add_depend([
 	    'ffmpeg-avcodec',
 	    'ffmpeg-avutil',
+	    'ffmpeg-avformat',
+	    'ffmpeg-avswscale',
 	    ])
 
 	return True

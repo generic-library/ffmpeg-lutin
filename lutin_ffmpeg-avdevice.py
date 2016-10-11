@@ -73,7 +73,11 @@ def configure(target, my_module):
 		my_module.add_optionnal_depend('X11', src_file=[
 		    'ffmpeg/libavdevice/xv.c'
 		    ])
-	if "Windows" in target.get_type():
+	elif "MacOs" in target.get_type():
+		my_module.add_src_file([
+		    'ffmpeg/libavdevice/avfoundation.m',
+		    ])
+	elif "Windows" in target.get_type():
 		my_module.add_src_file([
 		    'ffmpeg/libavdevice/dshow.c',
 		    'ffmpeg/libavdevice/dshow_common.c',
