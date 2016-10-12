@@ -111,11 +111,13 @@ def configure(target, my_module):
 		    'ffmpeg/libavutil/arm/float_dsp_neon.S',
 		    'ffmpeg/libavutil/arm/float_dsp_vfp.S',
 		    ])
+		my_module.add_header_file([
+		    'ffmpeg/libavutil/arm/asm.S',
+		    ],
+		    destination_path="libavutil/arm")
 	else:
 		debug.warning("unknow architecture ...");
-
 	my_module.compile_version("c", 1999)
-	my_module.add_path("ffmpeg", export=True)
 	
 	lutinLib_ffmpegCommon.add_common_property(target, my_module);
 	
@@ -124,5 +126,6 @@ def configure(target, my_module):
 	my_module.add_depend('m')
 	my_module.add_depend('z')
 	my_module.add_depend('pthread')
+	my_module.add_depend('ffmpeg-headers')
 
 	return True

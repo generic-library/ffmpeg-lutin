@@ -259,9 +259,7 @@ def configure(target, my_module):
 		my_module.add_src_file([
 		    'ffmpeg/libavfilter/vf_coreimage.m',
 		    ])
-	
 	my_module.compile_version("c", 1999)
-	my_module.add_path("ffmpeg")
 	
 	lutinLib_ffmpegCommon.add_common_property(target, my_module);
 	
@@ -275,6 +273,7 @@ def configure(target, my_module):
 	    'ffmpeg-avutil',
 	    'ffmpeg-avformat',
 	    'ffmpeg-avswscale',
+	    'ffmpeg-headers',
 	    ])
 
 	return True

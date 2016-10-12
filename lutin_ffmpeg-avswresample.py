@@ -54,7 +54,6 @@ def configure(target, my_module):
 	else:
 		debug.warning("unknow architecture ...");
 	my_module.compile_version("c", 1999)
-	my_module.add_path("ffmpeg")
 	
 	lutinLib_ffmpegCommon.add_common_property(target, my_module);
 	
@@ -65,6 +64,7 @@ def configure(target, my_module):
 	my_module.add_depend('pthread')
 	my_module.add_depend([
 	    'ffmpeg-avutil',
+	    'ffmpeg-headers',
 	    ])
 	return True
 	

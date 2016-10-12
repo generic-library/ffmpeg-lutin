@@ -116,7 +116,6 @@ def add_common_property(target, my_module):
 	
 	if "Windows" in target.get_type():
 		my_module.add_flag('c', [
-		    "Wdeclaration-after-statement",
 		    "-fomit-frame-pointer",
 		    "-Wno-maybe-uninitialized",
 		    ])

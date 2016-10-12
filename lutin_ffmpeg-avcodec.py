@@ -934,13 +934,18 @@ def configure(target, my_module):
 		    ])
 	else:
 		debug.warning("unknow architecture ...");
+	
+	#TODO : this is bad ...
+	my_module.add_header_file([
+	    'ffmpeg/libavcodec/bsf_list.c',
+	    ],
+	    destination_path="libavcodec")
 	"""
 	my_module.add_optionnal_depend('vdpau', src_file=[
 	    'ffmpeg/libavcodec/vdpau.c',
 	    ])
 	"""
 	my_module.compile_version("c", 1999)
-	my_module.add_path("ffmpeg")
 	
 	
 	lutinLib_ffmpegCommon.add_common_property(target, my_module);
@@ -953,6 +958,7 @@ def configure(target, my_module):
 	my_module.add_depend([
 	    'ffmpeg-avswresample',
 	    'ffmpeg-avutil',
+	    'ffmpeg-headers',
 	    ])
 
 	return True

@@ -89,14 +89,7 @@ def configure(target, my_module):
 		    'ffmpeg/libavdevice/gdigrab.c',
 		    'ffmpeg/libavdevice/vfwcap.c',
 		    ])
-	"""
-	my_module.add_header_file([
-	    'module-name/file1.h',
-	    'module-name/file2.h'
-	    ])
-	"""
 	my_module.compile_version("c", 1999)
-	my_module.add_path("ffmpeg")
 	
 	lutinLib_ffmpegCommon.add_common_property(target, my_module);
 	
@@ -108,6 +101,7 @@ def configure(target, my_module):
 	my_module.add_depend([
 	    'ffmpeg-avfilter',
 	    'ffmpeg-avutil',
+	    'ffmpeg-headers',
 	    ])
 	
 	return True

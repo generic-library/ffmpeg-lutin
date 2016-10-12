@@ -459,8 +459,12 @@ def configure(target, my_module):
 	    'ffmpeg/libavformat/yuv4mpegdec.c',
 	    'ffmpeg/libavformat/yuv4mpegenc.c',
 	    ])
+	#TODO : this is bad ...
+	my_module.add_header_file([
+	    'ffmpeg/libavformat/protocol_list.c',
+	    ],
+	    destination_path="libavformat")
 	my_module.compile_version("c", 1999)
-	my_module.add_path("ffmpeg")
 	
 	lutinLib_ffmpegCommon.add_common_property(target, my_module);
 	
@@ -469,12 +473,13 @@ def configure(target, my_module):
 	my_module.add_depend('m')
 	my_module.add_depend('z')
 	my_module.add_depend('pthread')
-	if "linux" in target.get_type():
+	if "Linux" in target.get_type():
 		my_module.add_depend('rpc')
 		my_module.add_depend('arpa')
 	my_module.add_depend([
 	    'ffmpeg-avcodec',
 	    'ffmpeg-avutil',
+	    'ffmpeg-headers',
 	    ])
 
 	return True
