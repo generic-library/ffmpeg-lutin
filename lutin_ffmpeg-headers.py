@@ -31,4 +31,27 @@ def configure(target, my_module):
 	    'ffmpeg/*.h',
 	    ],
 	    recursive=True)
+	
+	generated_path = os.path.join("generated", target.get_name())
+	generated_path_bs = os.path.join("generated", target.get_name() + "_" + str(target.get_bus_size()))
+	if os.path.exists(os.path.join(os.path.dirname(__file__), generated_path_bs)) == True:
+		#my_module.add_path(generated_path_bs)
+		my_module.add_header_file([
+		    generated_path_bs + "/*",
+		    ],
+		    recursive=True)
+	elif os.path.exists(os.path.join(os.path.dirname(__file__), generated_path)) == True:
+		#my_module.add_path(generated_path)
+		my_module.add_header_file([
+		    generated_path + "/*",
+		    ],
+		    recursive=True)
+	else:
+		debug.warning("get default Path for type: " + str(target.get_type()))
+		#my_module.add_path("generated/Linux")
+		my_module.add_header_file([
+		    "generated/Linux/*",
+		    ],
+		    recursive=True)
+	
 	return True
