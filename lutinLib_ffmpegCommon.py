@@ -37,8 +37,7 @@ def add_common_property(target, my_module):
 		    "-D_REENTRANT",
 		    "-DPIC"
 		    ])
-	elif    "MacOs" in target.get_type() \
-	     or "IOs" in target.get_type():
+	elif "MacOs" in target.get_type():
 		my_module.add_depend([
 		    "QuartzCore",
 		    "AppKit",
@@ -75,6 +74,20 @@ def add_common_property(target, my_module):
 			my_module.add_flag('c', [
 			    "-DCONFIG_THUMB=0",
 			    ])
+	elif "---IOs" in target.get_type():
+		my_module.add_flag('c', [
+		    "-DZLIB_CONST",
+		    "-D_REENTRANT",
+		    "-DPIC"
+		    ])
+		my_module.add_flag('c', [
+		    "-DANDROID",
+		    "-Dstrtod=avpriv_strtod",
+		    "-ftree-ter",
+		    ])
+		my_module.add_flag('c', [
+		    "-DCONFIG_THUMB=0",
+		    ])
 	
 	if target.get_arch() == "arm":
 		# need to force optimisation (compilation error otherwise)

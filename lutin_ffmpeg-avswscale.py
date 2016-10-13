@@ -51,7 +51,8 @@ def configure(target, my_module):
 		    'ffmpeg/libswscale/x86/swscale.c',
 		    'ffmpeg/libswscale/x86/yuv2rgb.c',
 		    ])
-	elif target.get_arch() == "arm":
+	elif     target.get_arch() == "arm" \
+	     and target.get_bus_size() == "32":
 		my_module.add_src_file([
 		    'ffmpeg/libswscale/arm/hscale.S',
 		    'ffmpeg/libswscale/arm/output.S',
@@ -60,6 +61,15 @@ def configure(target, my_module):
 		    'ffmpeg/libswscale/arm/swscale.c',
 		    'ffmpeg/libswscale/arm/swscale_unscaled.c',
 		    'ffmpeg/libswscale/arm/yuv2rgb_neon.S',
+		    ])
+	elif     target.get_arch() == "arm" \
+	     and target.get_bus_size() == "64":
+		my_module.add_src_file([
+		    'ffmpeg/libswscale/aarch64/hscale.S',
+		    'ffmpeg/libswscale/aarch64/output.S',
+		    'ffmpeg/libswscale/aarch64/swscale.c',
+		    'ffmpeg/libswscale/aarch64/swscale_unscaled.c',
+		    'ffmpeg/libswscale/aarch64/yuv2rgb_neon.S',
 		    ])
 	else:
 		debug.warning("unknow architecture ...");

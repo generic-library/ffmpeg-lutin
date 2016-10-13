@@ -44,12 +44,20 @@ def configure(target, my_module):
 		    'ffmpeg/libswresample/x86/rematrix_init.c',
 		    'ffmpeg/libswresample/x86/resample_init.c',
 		    ])
-	elif target.get_arch() == "arm":
+	elif     target.get_arch() == "arm" \
+	     and target.get_bus_size() == "32":
 		my_module.add_src_file([
 		    'ffmpeg/libswresample/arm/audio_convert_init.c',
 		    'ffmpeg/libswresample/arm/audio_convert_neon.S',
 		    'ffmpeg/libswresample/arm/resample.S',
 		    'ffmpeg/libswresample/arm/resample_init.c',
+		    ])
+	elif     target.get_arch() == "arm" \
+	     and target.get_bus_size() == "64":
+		my_module.add_src_file([
+		    'ffmpeg/libswresample/aarch64/audio_convert_init.c',
+		    'ffmpeg/libswresample/aarch64/audio_convert_neon.S',
+		    'ffmpeg/libswresample/aarch64/neontest.c',
 		    ])
 	else:
 		debug.warning("unknow architecture ...");

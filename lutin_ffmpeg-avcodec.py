@@ -825,7 +825,8 @@ def configure(target, my_module):
 		    'ffmpeg/libavcodec/x86/vp9dsp_init_16bpp.c',
 		    'ffmpeg/libavcodec/x86/xvididct_init.c',
 		    ])
-	elif target.get_arch() == "arm":
+	elif     target.get_arch() == "arm" \
+	     and target.get_bus_size() == "32":
 		my_module.add_src_file([
 		    'ffmpeg/libavcodec/arm/aacpsdsp_init_arm.c',
 		    'ffmpeg/libavcodec/arm/aacpsdsp_neon.S',
@@ -931,6 +932,38 @@ def configure(target, my_module):
 		    'ffmpeg/libavcodec/arm/vp8dsp_init_armv6.c',
 		    'ffmpeg/libavcodec/arm/vp8dsp_init_neon.c',
 		    'ffmpeg/libavcodec/arm/vp8dsp_neon.S',
+		    ])
+	elif     target.get_arch() == "arm" \
+	     and target.get_bus_size() == "64":
+		my_module.add_src_file([
+		    'ffmpeg/libavcodec/aarch64/fft_init_aarch64.c',
+		    'ffmpeg/libavcodec/aarch64/fft_neon.S',
+		    'ffmpeg/libavcodec/aarch64/fmtconvert_init.c',
+		    'ffmpeg/libavcodec/aarch64/fmtconvert_neon.S',
+		    'ffmpeg/libavcodec/aarch64/h264chroma_init_aarch64.c',
+		    'ffmpeg/libavcodec/aarch64/h264cmc_neon.S',
+		    'ffmpeg/libavcodec/aarch64/h264dsp_init_aarch64.c',
+		    'ffmpeg/libavcodec/aarch64/h264dsp_neon.S',
+		    'ffmpeg/libavcodec/aarch64/h264idct_neon.S',
+		    'ffmpeg/libavcodec/aarch64/h264pred_init.c',
+		    'ffmpeg/libavcodec/aarch64/h264pred_neon.S',
+		    'ffmpeg/libavcodec/aarch64/h264qpel_init_aarch64.c',
+		    'ffmpeg/libavcodec/aarch64/h264qpel_neon.S',
+		    'ffmpeg/libavcodec/aarch64/hpeldsp_init_aarch64.c',
+		    'ffmpeg/libavcodec/aarch64/hpeldsp_neon.S',
+		    'ffmpeg/libavcodec/aarch64/imdct15_init.c',
+		    'ffmpeg/libavcodec/aarch64/imdct15_neon.S',
+		    'ffmpeg/libavcodec/aarch64/mdct_neon.S',
+		    'ffmpeg/libavcodec/aarch64/mpegaudiodsp_init.c',
+		    'ffmpeg/libavcodec/aarch64/mpegaudiodsp_neon.S',
+		    'ffmpeg/libavcodec/aarch64/rv40dsp_init_aarch64.c',
+		    'ffmpeg/libavcodec/aarch64/synth_filter_init.c',
+		    'ffmpeg/libavcodec/aarch64/synth_filter_neon.S',
+		    'ffmpeg/libavcodec/aarch64/vc1dsp_init_aarch64.c',
+		    'ffmpeg/libavcodec/aarch64/videodsp.S',
+		    'ffmpeg/libavcodec/aarch64/videodsp_init.c',
+		    'ffmpeg/libavcodec/aarch64/vorbisdsp_init.c',
+		    'ffmpeg/libavcodec/aarch64/vorbisdsp_neon.S',
 		    ])
 	else:
 		debug.warning("unknow architecture ...");

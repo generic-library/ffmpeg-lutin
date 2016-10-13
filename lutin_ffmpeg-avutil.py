@@ -103,7 +103,8 @@ def configure(target, my_module):
 		    'ffmpeg/libavutil/x86/lls_init.c',
 		    'ffmpeg/libavutil/x86/pixelutils_init.c',
 		    ])
-	elif target.get_arch() == "arm":
+	elif     target.get_arch() == "arm" \
+	     and target.get_bus_size() == "32":
 		my_module.add_src_file([
 		    'ffmpeg/libavutil/arm/float_dsp_init_arm.c',
 		    'ffmpeg/libavutil/arm/float_dsp_init_neon.c',
@@ -115,6 +116,17 @@ def configure(target, my_module):
 		    'ffmpeg/libavutil/arm/asm.S',
 		    ],
 		    destination_path="libavutil/arm")
+	elif     target.get_arch() == "arm" \
+	     and target.get_bus_size() == "64":
+		my_module.add_src_file([
+		    'ffmpeg/libavutil/aarch64/cpu.c',
+		    'ffmpeg/libavutil/aarch64/float_dsp_init.c',
+		    'ffmpeg/libavutil/aarch64/float_dsp_neon.S',
+		    ])
+		my_module.add_header_file([
+		    'ffmpeg/libavutil/aarch64/asm.S',
+		    ],
+		    destination_path="libavutil/aarch64")
 	else:
 		debug.warning("unknow architecture ...");
 	my_module.compile_version("c", 1999)
