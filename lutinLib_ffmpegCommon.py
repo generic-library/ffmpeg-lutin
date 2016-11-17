@@ -21,7 +21,6 @@ def add_generate_path(target, my_module):
 def add_common_property(target, my_module):
 	add_generate_path(target, my_module)
 	
-	
 	my_module.add_flag('c', [
 	    "-D_ISOC99_SOURCE",
 	    "-D_FILE_OFFSET_BITS=64",

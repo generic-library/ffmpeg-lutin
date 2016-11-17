@@ -968,6 +968,15 @@ def configure(target, my_module):
 	else:
 		debug.warning("unknow architecture ...");
 	
+	my_module.add_optionnal_depend('fdk-aac',
+	                               compilation_flags=["c", ["-DCONFIG_LIBFDK_AAC=1", "-DCONFIG_LIBFDK_AAC_DECODER=1", "-DCONFIG_LIBFDK_AAC_ENCODER=1"]],
+	                               compilation_flags_not_found=["c", ["-DCONFIG_LIBFDK_AAC=0", "-DCONFIG_LIBFDK_AAC_DECODER=0", "-DCONFIG_LIBFDK_AAC_ENCODER=0"]],
+	                               src_file=[
+	                                   'ffmpeg/libavcodec/libfdk-aacenc.c',
+	                                   'ffmpeg/libavcodec/libfdk-aacdec.c'
+	                                   ]
+	                               )
+	
 	#TODO : this is bad ...
 	my_module.add_header_file([
 	    'ffmpeg/libavcodec/bsf_list.c',
