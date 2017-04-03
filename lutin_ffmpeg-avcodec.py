@@ -979,7 +979,8 @@ def configure(target, my_module):
 	
 	#TODO : this is bad ...
 	my_module.add_header_file([
-	    'ffmpeg/libavcodec/bsf_list.c',
+	    #'ffmpeg/libavcodec/bsf_list.c',
+	    'generated/bsf_list.c',
 	    ],
 	    destination_path="libavcodec")
 	"""

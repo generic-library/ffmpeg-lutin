@@ -461,7 +461,8 @@ def configure(target, my_module):
 	    ])
 	#TODO : this is bad ...
 	my_module.add_header_file([
-	    'ffmpeg/libavformat/protocol_list.c',
+	    #'ffmpeg/libavformat/protocol_list.c',
+	    'generated/protocol_list.c',
 	    ],
 	    destination_path="libavformat")
 	my_module.compile_version("c", 1999)
