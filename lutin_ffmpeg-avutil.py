@@ -111,6 +111,7 @@ def configure(target, my_module):
 		    'ffmpeg/libavutil/arm/float_dsp_init_vfp.c',
 		    'ffmpeg/libavutil/arm/float_dsp_neon.S',
 		    'ffmpeg/libavutil/arm/float_dsp_vfp.S',
+		    'ffmpeg/libavutil/arm/cpu.c',
 		    ])
 		my_module.add_header_file([
 		    'ffmpeg/libavutil/arm/asm.S',
@@ -122,6 +123,7 @@ def configure(target, my_module):
 		    'ffmpeg/libavutil/aarch64/cpu.c',
 		    'ffmpeg/libavutil/aarch64/float_dsp_init.c',
 		    'ffmpeg/libavutil/aarch64/float_dsp_neon.S',
+		    'ffmpeg/libavutil/arm/cpu.c',
 		    ])
 		my_module.add_header_file([
 		    'ffmpeg/libavutil/aarch64/asm.S',

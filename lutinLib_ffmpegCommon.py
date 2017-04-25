@@ -66,6 +66,9 @@ def add_common_property(target, my_module):
 		    "-Dstrtod=avpriv_strtod",
 		    "-ftree-ter",
 		    ])
+		my_module.add_src_file([
+		    'ffmpeg/compat/strtod.c'
+		    ])
 		if target.get_arm_mode() == "thumb":
 			my_module.add_flag('c', [
 			    "-DCONFIG_THUMB=1",
@@ -84,6 +87,9 @@ def add_common_property(target, my_module):
 		    "-DANDROID",
 		    "-Dstrtod=avpriv_strtod",
 		    "-ftree-ter",
+		    ])
+		my_module.add_src_file([
+		    'ffmpeg/compat/strtod.c'
 		    ])
 		my_module.add_flag('c', [
 		    "-DCONFIG_THUMB=0",

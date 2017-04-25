@@ -932,6 +932,7 @@ def configure(target, my_module):
 		    'ffmpeg/libavcodec/arm/vp8dsp_init_armv6.c',
 		    'ffmpeg/libavcodec/arm/vp8dsp_init_neon.c',
 		    'ffmpeg/libavcodec/arm/vp8dsp_neon.S',
+		    'ffmpeg/libavcodec/neon/mpegvideo.c',
 		    ])
 	elif     target.get_arch() == "arm" \
 	     and target.get_bus_size() == "64":
@@ -964,6 +965,7 @@ def configure(target, my_module):
 		    'ffmpeg/libavcodec/aarch64/videodsp_init.c',
 		    'ffmpeg/libavcodec/aarch64/vorbisdsp_init.c',
 		    'ffmpeg/libavcodec/aarch64/vorbisdsp_neon.S',
+		    'ffmpeg/libavcodec/neon/mpegvideo.c',
 		    ])
 	else:
 		debug.warning("unknow architecture ...");
