@@ -132,7 +132,6 @@ def add_common_property(target, my_module):
 	    ##"-Wformat",
 	    ##"-fdiagnostics-color=auto",
 	    ])
-	
 	if "Windows" in target.get_type():
 		my_module.add_flag('c', [
 		    "-fomit-frame-pointer",
