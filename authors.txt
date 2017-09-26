@@ -5,7 +5,7 @@ Attila Kinali <>
 Baptiste Coudurier <>
 Ben Littler <>
 Benoit Fouet <>
-Clément Bœsch <>
+Clement Boesch <>
 Daniel Verkamp <>
 Ganesh Ajjanagadde <>
 Gwenole Beauchesne <>
@@ -25,7 +25,7 @@ Robert Swain <>
 Sascha Sommer <>
 Stefano Sabatini <>
 Stephan Hilb <>
-Tiancheng "Timothy" Gu <>
+Tiancheng Timothy Gu <>
 Tim Nicholson <>
-Tomas Härdin <>
+Tomas Hardin <>
 Wei Gao <>
