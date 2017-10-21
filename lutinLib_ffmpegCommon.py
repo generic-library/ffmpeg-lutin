@@ -6,12 +6,14 @@ import os
 import lutinLib_ffmpegCommon
 
 def add_generate_path(target, my_module):
-	return
+	#return
 	generated_path = os.path.join("generated", target.get_name())
 	generated_path_bs = os.path.join("generated", target.get_name() + "_" + str(target.get_bus_size()))
 	if os.path.exists(os.path.join(os.path.dirname(__file__), generated_path_bs)) == True:
+		#debug.error(" ppppp: " + generated_path);
 		my_module.add_path(generated_path_bs)
 	elif os.path.exists(os.path.join(os.path.dirname(__file__), generated_path)) == True:
+		#debug.error(" ppppp: " + generated_path);
 		my_module.add_path(generated_path)
 	else:
 		debug.warning("get default Path for type: " + str(target.get_type()))

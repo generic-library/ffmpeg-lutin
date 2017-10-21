@@ -27,6 +27,7 @@ def get_version():
 	return "version.txt"
 
 def configure(target, my_module):
+	return False
 	if "Linux" not in target.get_type():
 		return False
 	# add the file to compile:

@@ -51,6 +51,7 @@ def get_version():
 	return "version.txt"
 
 def configure(target, my_module):
+	return False
 	
 	# add the file to compile:
 	my_module.add_src_file([
